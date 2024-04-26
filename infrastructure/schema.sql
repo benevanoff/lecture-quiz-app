@@ -1,0 +1,10 @@
+DROP DATABASE IF EXISTS `sql_db`;
+CREATE DATABASE sql_db;
+USE sql_db;
+
+DROP TABLE IF EXISTS `lectures`;
+CREATE TABLE lectures (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    body TEXT NOT NULL
+);

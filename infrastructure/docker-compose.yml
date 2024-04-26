@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db_mysql: # MySQL Server
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    volumes:
+      - db_mysql:/var/lib/mysql
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../infrastructure/Dockerfile.backend
+    volumes:
+      - ../backend:/app
+    ports:
+      - 8080:8080
+
+
+volumes:
+  db_mysql:
