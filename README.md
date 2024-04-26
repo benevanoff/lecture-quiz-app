@@ -18,6 +18,18 @@ The frontend client will be written in JavaScript.
 
 ![architecture](./docs/architecture_diagram.png)
 
+## Infrastructure
+
+The `infrastructure` folder defines the infrastructure necessary to deploy the application, as code.
+
+`infrastructure/docker-compose.yml` defines a deployment template to run all the necesssary services on a single host.
+
+The template includes
+* a MySQL server with a database schema defined in `infrastructure/schema.sql`
+* A REST server for the backend defined in `infrastructure/Dockerfile.backend`
+
+To run the deployment, navigate to the `infrastructure` folder and run `docker compose up --build`
+
 ## Backend
 
 ### REST Interface
