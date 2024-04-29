@@ -18,7 +18,6 @@ def get_lecture_ids():
             query_results = cur.fetchall()
     if not query_results:
         return [], 200
-    print("query_results", query_results)
     return [result["id"] for result in query_results], 200
 
 @app.route("/lecture/create", methods=['POST'])
