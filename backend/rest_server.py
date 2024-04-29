@@ -1,3 +1,4 @@
+import pymysql
 from flask import Flask, request, jsonify
 from sql_conn import get_sql_db_connection
 
@@ -8,6 +9,17 @@ ADMIN_TOKEN = 'd4298aee-85c9-4182-ac0f-dfd1d5492163'
 @app.route("/", methods=['GET'])
 def root():
     return "lecture-quiz-app"
+
+@app.route("/lectures", methods=['GET'])
+def get_lecture_ids():
+    with get_sql_db_connection() as sql_client:
+        with sql_client.cursor() as cur:
+            cur.execute("SELECT id FROM lectures")
+            query_results = cur.fetchall()
+    if not query_results:
+        return [], 200
+    print("query_results", query_results)
+    return [result["id"] for result in query_results], 200
 
 @app.route("/lecture/create", methods=['POST'])
 def create_lecture():

@@ -8,6 +8,7 @@ db_config = {
     "password": os.environ.get("DB_PASS", "sqlpasswordsql"),
     "db": os.environ.get("DB_NAME", "sql_db"),
     "port": 3306,
+    "cursorclass": pymysql.cursors.DictCursor,
     "autocommit": True
 }
 
