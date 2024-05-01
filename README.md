@@ -34,6 +34,80 @@ To run the deployment, navigate to the `infrastructure` folder and run `docker c
 
 ### REST Interface
 
+Sure, here are the descriptions for each of the `app.route` functions:
+
+#### /register
+
+Register a new user in the system.
+
+Example Request:
+```
+POST /register
+BODY:
+    {
+        "name": "John Doe",
+        "username": "johndoe",
+        "email": "johndoe@example.com",
+        "password": "password123",
+        "type": "student"
+    }
+```
+
+#### /login
+
+Authenticate and login a user.
+
+Example Request:
+```
+POST /login
+BODY:
+    {
+        "username": "johndoe",
+        "password": "password123"
+    }
+```
+
+#### /logout
+
+Logout the currently logged-in user.
+
+Example Request:
+```
+POST /logout
+```
+
+#### /profile/update
+
+Update the profile information of the currently logged-in user.
+
+Example Request:
+```
+POST /profile/update
+HEADERS:
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "name": "John Doe",
+        "email": "johndoe@example.com"
+    }
+```
+
+#### /reset_password
+
+Reset the password for the currently logged-in user.
+
+Example Request:
+```
+POST /reset_password
+HEADERS:
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "old_password": "oldpassword",
+        "new_password": "newpassword"
+    }
+```
+
 #### /lectures
 
 List the IDs of available lectures from the database.
@@ -45,18 +119,18 @@ Example Request:
 GET /lectures
 ```
 
-#### /lecture/{lecture_id}
+#### /l{lecture_id}
 
 List the lecture title and body content for a specific lecture.
 
 Example Request:
 ```
-GET /lecture/1
+GET /l1
 ```
 
 #### /lecture/create
 
-Priveledged users may add new lectures to the database.
+Privileged users may add new lectures to the database.
 
 For authorization, a `token` must be passed in the request headers.
 
@@ -65,10 +139,162 @@ Example Request:
 POST /lecture/create
 HEADERS:
     Content-Type: application/json
-    token: <secret>
+    Authorization: Bearer <access_token>
 BODY:
     {
         "title": "Introduction to C++, Unit 1: Primitive Data Type",
-        "body": "Lorum Ipsumn ..."
+        "body": "Lorem Ipsum..."
     }
+```
+
+#### /l{lecture_id}/edit
+
+Edit the details of an existing lecture.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/edit
+HEADERS:
+    Content-Type: application/json
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "title": "Introduction to C++, Unit 1: Primitive Data Types",
+        "body": "Lorem Ipsum..."
+    }
+```
+
+#### /l{lecture_id}/delete
+
+Delete an existing lecture from the database.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/delete
+HEADERS:
+    Authorization: Bearer <access_token>
+```
+
+#### /l{lecture_id}/problemsets
+
+List the IDs of problem sets available for a specific lecture.
+
+Example Request:
+```
+GET /l1/problemsets
+```
+
+#### /l{lecture_id}/problemset/create
+
+Privileged users may add new problem sets to a lecture.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/problemset/create
+HEADERS:
+    Content-Type: application/json
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "title": "Problem Set 1",
+        "body": "Lorem Ipsum..."
+    }
+```
+
+#### /l{lecture_id}/ps{problemset_id}/edit
+
+Edit the details of an existing problem set.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/ps1/edit
+HEADERS:
+    Content-Type: application/json
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "title": "Problem Set 1 - Updated",
+        "body": "Updated body content..."
+    }
+```
+
+#### /l{lecture_id}/ps{problemset_id}/delete
+
+Delete an existing problem set from the database.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/ps1/delete
+HEADERS:
+    Authorization: Bearer <access_token>
+```
+
+#### /l{lecture_id}/ps{problemset_id}
+
+Get details of a specific problem set.
+
+Example Request:
+```
+GET /l1/ps1
+```
+
+#### /l{lecture_id}/ps{problemset_id}/problem/create
+
+Privileged users may add new problems to a problem set.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/ps1/problem/create
+HEADERS:
+    Content-Type: application/json
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "title": "Problem 1",
+        "body": "Lorem Ipsum..."
+    }
+```
+
+#### /l{lecture_id}/ps{problemset_id}/p{problem_id}/edit
+
+Edit the details of an existing problem.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/ps1/p1/edit
+HEADERS:
+    Content-Type: application/json
+    Authorization: Bearer <access_token>
+BODY:
+    {
+        "title": "Problem 1 - Updated",
+        "body": "Updated body content..."
+    }
+```
+
+#### /l{lecture_id}/ps{problemset_id}/p{problem_id}/delete
+
+Delete an existing problem from the database.
+
+For authorization, a `token` must be passed in the request headers.
+
+Example Request:
+```
+POST /l1/ps1/p1/delete
+HEADERS:
+    Authorization: Bearer <access_token>
 ```
