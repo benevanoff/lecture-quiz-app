@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import session
 import os
+import re
 import pymysql
 from contextlib import contextmanager
 
@@ -37,16 +38,17 @@ def role_required(*roles):
         @wraps(func)
         def wrapper(*args, **kwargs):
             # Check if user is logged in and user_role is in session
-            if 'user' not in session or 'type' not in session['user']:
-                return "Unauthorized", 403
+            if "user" not in session or "type" not in session["user"]:
+                return "Unauthorized 1", 403
             # Check if user has at least one of the required roles
-            user_type = session['user']['type']
+            user_type = session["user"]["type"]
             if user_type not in roles:
-                return "Unauthorized", 403
+                return "Unauthorized 2", 403
             # User has required role, proceed to the route function
             return func(*args, **kwargs)
         return wrapper
     return decorator
+
 
 def check_password(password):
     if len(password) < 8:
@@ -63,9 +65,26 @@ def check_password(password):
     return True, "Password meets complexity requirements"
 
 def check_email(email):
-    return '@' in email and '.' in email and email.count('@') == 1 \
-           and email.split('@')[0] and email.split('@')[1] \
-           and '.' in email.split('@')[1] and not email.split('@')[1].startswith('.') \
-           and not email.split('@')[1].endswith('.')
+    # Regular expression pattern for validating email addresses
+    pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+    if(re.fullmatch(pattern, email)):
+        return True
+    else:
+        return False
 
+def getproblemset_id(lecture_id, lecture_problemsetid):
+    problemset_id = sql("SELECT problemset_id FROM problemsets WHERE lecture_id=%s AND lecture_problemsetid=%s", (lecture_id, lecture_problemsetid))
+    
+    print(problemset_id)
+
+    return problemset_id[-1]["problemset_id"]
+
+def getproblem_id(lecture_id, lecture_problemsetid, problemset_problemid):
+    problemset_id = sql("SELECT problemset_id FROM problemsets WHERE lecture_id=%s AND lecture_problemsetid=%s", (lecture_id, lecture_problemsetid))[-1]["problemset_id"]
+    problem_id = sql("SELECT problem_id FROM problemsets WHERE problemset_id=%s AND lecture_problemsetid=%s", (problemset_id, problemset_problemid))
+    
+    print(problemset_id)
+    print(problem_id)
+
+    return problem_id[-1]["problem_id"]
 
