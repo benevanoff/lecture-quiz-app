@@ -3,4 +3,3 @@ pymysql
 cryptography
 Werkzeug
 Flask-Session
-functools 

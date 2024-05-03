@@ -23,8 +23,6 @@ CREATE TABLE problemsets (
     modified DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO problems (problemset_id, problemset_problemid, title, question, options, correct) VALUES (1, 1, "s", "s", "s", "s");
-
 DROP TABLE IF EXISTS `problems`;
 CREATE TABLE problems (
     problem_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -55,4 +53,3 @@ CREATE UNIQUE INDEX lecture_id ON lectures (lecture_id);
 CREATE UNIQUE INDEX problemset_id ON problemsets (problemset_id);
 CREATE UNIQUE INDEX problem_id ON problems (problem_id);
 CREATE UNIQUE INDEX username ON users (username);
-

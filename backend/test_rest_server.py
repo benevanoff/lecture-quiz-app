@@ -133,7 +133,7 @@ def test_create_lecture_problem_set_problem(server_url):
         # Create problem under the created problem set
         response = session.post(f'{server_url}/l1/ps1/problem/create', json=PROBLEM_DATA)
         assert response.status_code == 200
-        assert response.text == "Problem 'Math Quiz' created successfully"
+        assert response.text == "Problem created successfully"
 
 
 def test_get_lecture_problem_set_problem(server_url):
