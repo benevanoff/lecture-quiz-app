@@ -53,10 +53,12 @@ def login():
     if not username: return "must provide username", 403  # Check if username provided
     elif not password: return "must provide password", 403  # Check if password provided
 
-    print(sql("SELECT * FROM users"))
-    user = sql("SELECT * FROM users WHERE username = %s", username)
-    print("user", user, 1)
-    user = user[0]
+    query_result = sql("SELECT * FROM users WHERE username = %s", username)
+
+    if not query_result: # if no user with the requested username found - return code 403
+        return "Unauthorized", 403
+    
+    user = query_result[0]
 
     if not check_password_hash(user["hash"], password):
         return "invalid username and/or password", 403  # Invalid username/password

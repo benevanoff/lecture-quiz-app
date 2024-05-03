@@ -6,10 +6,8 @@ import requests
 from rest_server import app
 from helper import sql
 
-generate_username = lambda length=8: ''.join(random.choice(string.ascii_letters) for _ in range(length))
-
 SERVER_URL = 'http://127.0.0.1:8080'
-USERNAME = "test_username" #generate_username()
+USERNAME = "test_username"
 
 VALID_DATA = {
     "name": "Rizu Student",
