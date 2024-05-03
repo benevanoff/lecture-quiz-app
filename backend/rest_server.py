@@ -53,7 +53,10 @@ def login():
     if not username: return "must provide username", 403  # Check if username provided
     elif not password: return "must provide password", 403  # Check if password provided
 
-    user = sql("SELECT * FROM users WHERE username = %s", username)[0]
+    print(sql("SELECT * FROM users"))
+    user = sql("SELECT * FROM users WHERE username = %s", username)
+    print("user", user, 1)
+    user = user[0]
 
     if not check_password_hash(user["hash"], password):
         return "invalid username and/or password", 403  # Invalid username/password
@@ -134,6 +137,7 @@ def get_lectures():
     return [result["lecture_id"] for result in query_results], 200  # Return lecture IDs
 
 # -------------------------------- Create Lecture -------------------------------- #
+from helper import get_sql_db_connection
 @app.route("/lecture/create", methods=["POST"])
 @role_required("teacher", "admin")
 def create_lecture():  
@@ -146,9 +150,15 @@ def create_lecture():
     elif not body: return "Error: Body was not inputted.", 422  # Body not provided
     elif not category in CATEGORIES: return "Error: Category was not inputted / is not a valid category.", 422  # Invalid category
     
-    sql("INSERT INTO lectures (title, body, category) VALUES (%s, %s, %s)", (title, body, category))
+    with get_sql_db_connection() as sql_client:
+        with sql_client.cursor() as cur:
+            cur.execute("INSERT INTO lectures (title, body, category) VALUES (%s, %s, %s)", (title, body, category))
+            lecture_id = cur.lastrowid
 
-    return f"Lecture {title} Created", 200  # Lecture created
+    return jsonify({
+                "lecture_id": lecture_id,
+                "message": f"Lecture {title} Created",
+                    }), 200  # Lecture created
 
 # -------------------------------- Get Lecture -------------------------------- #
 @app.route("/l<int:lecture_id>", methods=["GET"])

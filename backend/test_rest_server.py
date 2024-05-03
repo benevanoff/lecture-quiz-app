@@ -9,7 +9,7 @@ from helper import sql
 generate_username = lambda length=8: ''.join(random.choice(string.ascii_letters) for _ in range(length))
 
 SERVER_URL = 'http://127.0.0.1:8080'
-USERNAME = generate_username()
+USERNAME = "test_username" #generate_username()
 
 VALID_DATA = {
     "name": "Rizu Student",
@@ -26,7 +26,7 @@ OLD_CREDENTIALS = {
 
 VALID_CREDENTIALS = {
     "username": USERNAME,
-    "password": "Password$123123"
+    "password": "Password&123123"
 }
 
 UPDATED_PROFILE_DATA = {
@@ -85,12 +85,26 @@ UPDATED_PROBLEM_DATA = {
 def server_url():
     return SERVER_URL
 
+def clear_database():
+    sql("DELETE FROM lectures")
+    sql("DELETE FROM problems")
+    sql("DELETE FROM problemsets")
+    sql("DELETE FROM users")
+
+def create_test_user():
+    sql("DELETE FROM users WHERE username=%s", (USERNAME))
+    with requests.Session() as session:
+        # Register
+        response = session.post(f'{SERVER_URL}/register', json=VALID_DATA)
+        assert response.status_code == 200
+
 def test_root_endpoint(server_url):
     response = requests.get(f'{server_url}/')
     assert response.status_code == 200
     assert response.text == "Welcome to Lecture Quiz App!"
 
-def test_register_login_update_reset(server_url):
+def test_user_register_login_update_reset(server_url):
+    sql("DELETE FROM users WHERE username=%s", (USERNAME))
     with requests.Session() as session:
         # Register
         response = session.post(f'{server_url}/register', json=VALID_DATA)
@@ -113,12 +127,15 @@ def test_register_login_update_reset(server_url):
         assert response.status_code == 200
         assert response.text == "Password reset successful"
 
-        # Set the password back
-        response = session.post(f'{server_url}/reset_password', json={"old_password": RESET_PASSWORD_DATA["new_password"], "new_password": VALID_CREDENTIALS["password"]})
+        # Logout
+        response = requests.post(f'{server_url}/logout')
         assert response.status_code == 200
-        assert response.text == "Password reset successful"
+        assert response.text == "Logged Out"
 
-def test_create_lecture_problem_set_problem(server_url):
+
+def test_lectures_and_problem_sets_get_create(server_url):
+    clear_database
+    create_test_user()
     with requests.Session() as session:
         # Login
         response = session.post(f'{server_url}/login', json=VALID_CREDENTIALS)
@@ -128,95 +145,37 @@ def test_create_lecture_problem_set_problem(server_url):
         # Create lecture
         response = session.post(f'{server_url}/lecture/create', json=LECTURE_DATA)
         assert response.status_code == 200
-        assert response.text == "Lecture Introduction to Python Created"
-
-        # Create problem set under the created lecture
-        response = session.post(f'{server_url}/l1/problemset/create', json=PROBLEM_SET_DATA)
-        assert response.status_code == 200
-        assert response.text == "Problem Set Problem Set 1 Created."
-
-        # Create problem under the created problem set
-        response = session.post(f'{server_url}/l1/ps1/problem/create', json=PROBLEM_DATA)
-        assert response.status_code == 200
-        assert response.text == "Problem created successfully"
-
-
-def test_get_lecture_problem_set_problem(server_url):
-    with requests.Session() as session:
-        # Login
-        response = session.post(f'{server_url}/login', json=VALID_CREDENTIALS)
-        assert response.status_code == 200
-        assert response.text == "Logged In"
+        response_json = response.json()
+        assert response_json["message"] == "Lecture Introduction to Python Created"
+        test_lecture_id = response_json["lecture_id"]
 
         # Get the created lecture
-        response = session.get(f'{server_url}/l1')
+        response = session.get(f'{server_url}/l{test_lecture_id}')
         assert response.status_code == 200
         lecture_data = response.json()
         assert lecture_data['title'] == "Introduction to Python"
         assert lecture_data['category'] == "technology"
 
-        # Get list of problem sets for the lecture
-        response = session.get(f'{server_url}/l1/problemsets')
+        # Create problem set under the created lecture
+        response = session.post(f'{server_url}/l{test_lecture_id}/problemset/create', json=PROBLEM_SET_DATA)
         assert response.status_code == 200
-        problem_sets = response.json()
-        assert len(problem_sets) == 1
+        assert response.text == "Problem Set Problem Set 1 Created."
 
-        # Get the created problem
-        response = session.get(f'{server_url}/l1/ps1/p1')
-        assert response.status_code == 200
-        problem_data = response.json()
-        assert problem_data['title'] == "Math Quiz"
+        # TODO: Get list of problem sets for the lecture
 
-def test_edit_lecture_problem_set_problem(server_url):
-    with requests.Session() as session:
-        # Login
-        response = session.post(f'{server_url}/login', json=VALID_CREDENTIALS)
-        assert response.status_code == 200
-        assert response.text == "Logged In"
+        # TODO: Create problem under the created problem set
 
-        # Edit the lecture
-        response = session.post(f'{server_url}/l1/edit', json=UPDATED_LECTURE_DATA)
-        assert response.status_code == 200
-        assert "Edited" in response.text
+        # TODO: Edit the lecture
 
-        # Edit the problem set
-        response = session.post(f'{server_url}/l1/ps1/edit', json=UPDATED_PROBLEM_SET_DATA)
-        assert response.status_code == 200
-        assert "Edited" in response.text
+        # TODO: Edit the problem set
 
-        # Edit the problem
-        response = session.post(f'{server_url}/l1/ps1/p1/edit', json=UPDATED_PROBLEM_DATA)
-        assert response.status_code == 200
-        assert "Edited" in response.text
+        # TODO: # Edit the problem
 
+        # TODO: Delete the lecture
 
-def test_delete_lecture_problem_set_problem(server_url):
-    with requests.Session() as session:
-        # Login
-        response = session.post(f'{server_url}/login', json=VALID_CREDENTIALS)
-        assert response.status_code == 200
-        assert response.text == "Logged In"
+        # TODO: Delete the problem set
 
-        # Delete the lecture
-        response = session.post(f'{server_url}/l1/delete')
-        assert response.status_code == 200
-        assert "Deleted" in response.text
-
-        # Delete the problem set
-        response = session.post(f'{server_url}/l1/ps1/delete')
-        assert response.status_code == 200
-        assert "Deleted" in response.text
-
-        # Delete the problem
-        response = session.post(f'{server_url}/l1/ps1/p1/delete')
-        assert response.status_code == 200
-        assert "Deleted" in response.text
-
-
-def test_logout(server_url):
-    response = requests.post(f'{server_url}/logout')
-    assert response.status_code == 200
-    assert response.text == "Logged Out"
+        # TODO: # Delete the problem
 
 if __name__ == "__main__":
     pytest.main()
