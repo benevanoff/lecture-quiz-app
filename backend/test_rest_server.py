@@ -113,6 +113,11 @@ def test_register_login_update_reset(server_url):
         assert response.status_code == 200
         assert response.text == "Password reset successful"
 
+        # Set the password back
+        response = session.post(f'{server_url}/reset_password', json={"old_password": RESET_PASSWORD_DATA["new_password"], "new_password": VALID_CREDENTIALS["password"]})
+        assert response.status_code == 200
+        assert response.text == "Password reset successful"
+
 def test_create_lecture_problem_set_problem(server_url):
     with requests.Session() as session:
         # Login
