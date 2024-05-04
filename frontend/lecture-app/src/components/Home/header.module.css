@@ -1,4 +1,5 @@
 .heading{
+    padding-top: 2rem;
     text-align: center;
     font-size: 3rem;
     text-decoration: underline;
@@ -6,7 +7,7 @@
 
 .container {
     display: flex;
-    padding:5rem 15% 0 15%;
+    padding: 5rem 15% 0 15%;
     background: linear-gradient(90deg, white,#f4fff9);
     gap: 100px;
 
