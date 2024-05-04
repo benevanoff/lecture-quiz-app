@@ -1,10 +1,10 @@
 import './App.css'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/HeaderForHome';
 import About from './components/About';
 import Contact from './components/Contact';
-import Header from './components/home/header'
+import Header from './components/HeaderForHome/header'
 import Navbar from './components/Navbar/Navbar'
 
 function App() {
