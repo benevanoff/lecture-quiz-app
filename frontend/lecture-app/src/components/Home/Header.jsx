@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./header.module.css"
 
-const Header = () => {
+const header = () => {
     return (
         <>
         <h1 className={styles.heading}>LecQuiz</h1>
@@ -19,4 +19,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default header
