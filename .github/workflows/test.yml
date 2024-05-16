@@ -24,6 +24,9 @@ jobs:
         cd infrastructure
         docker compose up --build -d
 
+    - name: Wait for Services to Start Up
+      run: sleep 30
+
     - name: Install Python Module Dependencies
       run: |
         cd backend
