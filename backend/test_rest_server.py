@@ -220,7 +220,7 @@ def test_lectures_and_problem_sets_get_create(server_url):
         assert response.json()["completed"] == True
 
 def test_delete_account(server_url):
-    clear_database
+    clear_database()
     create_test_user()
     with requests.Session() as session:
         # Login
