@@ -67,7 +67,7 @@ def register():
         (name, username, email, str(generate_password_hash(password)), type),
     )
     return (jsonify({"completed": True}),  200,
-    )  # Registration successful
+    )  # Registration Successful
 
 
 # -------------------------------- Login -------------------------------- #
