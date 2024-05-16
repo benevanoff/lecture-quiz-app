@@ -3,3 +3,5 @@ pymysql
 cryptography
 Werkzeug
 Flask-Session
+pytest
+requests
