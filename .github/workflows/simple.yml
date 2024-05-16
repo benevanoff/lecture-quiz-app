@@ -1,4 +1,4 @@
-name: Test Suite
+name: Simple Test
 
 on:
   pull_request:
@@ -7,19 +7,15 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v2
-
-    - name: Build and Run Docker Containers
-      run: |
-        cd infrastructure
-        docker compose up --build -d
+      - name: Print Message
+        run: echo "This is a test workflow"
