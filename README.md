@@ -1,5 +1,7 @@
 # Lecture Quiz App
 
+[![Test Suite](https://github.com/benevanoff/lecture-quiz-app/actions/workflows/test.yml/badge.svg)](https://github.com/benevanoff/lecture-quiz-app/actions/workflows/test.yml)
+
 ## Overview
 
 This is an app for hosting educational content with interactive and auto-graded comprehension questions.
