@@ -1,9 +1,12 @@
 import React from "react";
 import styles from"./Navbar.module.css"
+import { useNavigate } from "react-router-dom";
 import { HiAcademicCap } from "react-icons/hi2";
 
 const Navbar = () => {
-    const options = ["Home", "Signin", "about", "Contact"]
+    const options = ["Home", "Sign In", "About", "Contact"]
+    const links = {"Home": "/", "Sign In": "/signin", "About": "/about", "Contact": "contact"};
+    const nav = useNavigate();
 
     return (
         <>
@@ -15,7 +18,7 @@ const Navbar = () => {
                 <div className={styles.list_container}>
                     <ul className={styles.ul_options}>
                         {options.map((option) => {
-                            return <li key={option}>{option}</li>
+                            return <li key={option} onClick={() => {nav(links[option])}}>{option}</li>
                         })}
                     </ul>
                 </div>
