@@ -1,0 +1,31 @@
+.heading{
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+.container {
+    display: flex;
+    padding: 5rem 15% 0 15%;
+    background: linear-gradient(90deg, white,#f4fff9);
+    gap: 100px;
+
+    & .txt_des {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 20px;
+        line-height: 32px;
+        font-weight: 500;
+        color: #36344D;
+        letter-spacing: .3px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+
+    & .side_img>img {
+        height: 50vh;
+        width: auto;
+        border-radius: 50px;
+    }
+}

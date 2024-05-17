@@ -1,0 +1,21 @@
+# Use an official Node.js runtime as a parent image
+FROM node:16
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Install dependencies
+ARG CACHEBUST=1
+RUN npm install --verbose
+
+# Build the project
+RUN npm run build
+
+# Set the command to run your app
+CMD ["npm","run", "dev", "--", "--host"]
+
+# Expose the port the app runs on
+EXPOSE 5173
