@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, session
 from flask_session import Session
+from flask_cors import CORS
 from helper import (
     sql,
     check_email,
@@ -11,9 +12,31 @@ from helper import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
+
+# Session config
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+# CORS config
+origins = [
+    "http://127.0.0.1",
+    "http://localhost",
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1",
+    "https://localhost",
+    "https://127.0.0.1:3000",
+    "https://localhost:3000",
+]
+CORS(app, resources={r"/*": {
+    "origins": origins,
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Set-Cookie"],
+    "supports_credentials": True
+}})
+
+# Some application constants
 CATEGORIES = [
     "math",
     "technology",
