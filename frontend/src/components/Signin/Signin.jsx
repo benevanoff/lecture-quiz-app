@@ -26,6 +26,7 @@ const SignIn = () => {
             if (response.status === 200) {
                 setError(false);
                 console.log("loggin success");
+                window.location.reload(); // reload the whole page - hack to reload the Navbar since the query effect is in the application root component
             }
           } catch (error) {
             if (error.response.status == 403) setError('Invalid Credentials');
