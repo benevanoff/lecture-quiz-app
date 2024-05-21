@@ -16,12 +16,15 @@ app = Flask(__name__)
 # Session config
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config['SESSION_COOKIE_HTTPONLY'] = True
 Session(app)
 
 # CORS config
 origins = [
     "http://127.0.0.1",
     "http://localhost",
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
     "http://127.0.0.1:3000",
     "http://localhost:3000",
     "https://127.0.0.1",
@@ -199,6 +202,17 @@ def reset_password():
 
     return (
         jsonify({"completed": True}),
+        200,
+    )
+
+# -------------------------------- Get Profile -------------------------------- #
+@app.route("/account", methods=["GET"])
+@role_required("student", "teacher", "admin")
+def get_profile():
+    user_id = session["user"]["user_id"]
+    user = sql("SELECT user_id, name, username, email, type FROM users WHERE user_id = %s", user_id)
+    return (
+        jsonify(user),
         200,
     )
 
