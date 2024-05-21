@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const LectureQuizList = () => {
 
     const [ lectures, setLectures ] = useState([]);
+    const nav = useNavigate();
   
     useEffect(() => {
       const getLectureQuizes = async () => {
@@ -23,7 +25,7 @@ const LectureQuizList = () => {
     return (<center>
       <h1>Lecture Quizzes</h1>
       {lectures.map((e) => {
-        return <span key={'lecture-span-'+{e}}>Lecture ID: {e /*TODO: Make a custom component to render the lecture title from the lecture ID*/}</span>;
+        return <span className='lecture-preview-span' title={e} key={'lecture-'+e} onClick={(e) => {nav('/lectures/' + e.target.title)}}>Lecture ID: {e /*TODO: Make a custom component to render the lecture title from the lecture ID*/}</span>;
       })}
     </center>);
   };
