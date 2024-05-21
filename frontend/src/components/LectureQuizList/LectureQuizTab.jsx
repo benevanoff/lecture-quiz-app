@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import './LectureQuizList.css'
 
 const LectureQuizTab = (props) => {
 
@@ -21,7 +22,7 @@ const LectureQuizTab = (props) => {
         };
         getLectureQuiz();
     });
-    return <span className='lecture-preview-span' key={'lecture-'+props.lecture_id} onClick={(e) => {nav('/lecture/' + props.lecture_id)}}>{title}</span>;
+    return <span className='lecture-preview' key={'lecture-'+props.lecture_id} onClick={(e) => {nav('/lecture/' + props.lecture_id)}}>{title}</span>;
 };
 
 export default LectureQuizTab;

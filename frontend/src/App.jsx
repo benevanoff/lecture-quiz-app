@@ -7,6 +7,7 @@ import Header from './components/Home/Header';
 import Navbar from './components/Navbar/Navbar';
 import SignIn from './components/Signin/Signin';
 import LectureQuizList from './components/LectureQuizList/LectureQuizList';
+import LecturePage from './components/Lecture/LecturePage';
 
 const App = () => {
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/about" element={<Header />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/lecturequizes" element={<LectureQuizList />} />
+          <Route path="/lecture/:lecture_id" element={<LecturePage />} />
         </Routes>
       </BrowserRouter>
     </>
