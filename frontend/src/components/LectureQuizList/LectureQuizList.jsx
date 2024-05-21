@@ -20,12 +20,12 @@ const LectureQuizList = () => {
       getLectureQuizes();
     }, []);
   
-    return (<>
+    return (<center>
       <h1>Lecture Quizzes</h1>
       {lectures.map((e) => {
         return <span key={'lecture-span-'+{e}}>Lecture ID: {e /*TODO: Make a custom component to render the lecture title from the lecture ID*/}</span>;
       })}
-    </>);
+    </center>);
   };
 
   export default LectureQuizList;

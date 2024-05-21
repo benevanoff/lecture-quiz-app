@@ -5,8 +5,8 @@ import { HiAcademicCap } from "react-icons/hi2";
 
 const Navbar = (props) => {
     const nav = useNavigate();
-    const options_logged_out = ["Home", "Sign In", "About", "Contact"]
-    const options_logged_in = ["Home", "Profile", "About", "Contact"]
+    const options_logged_out = ["Home", "Sign In", "About"]
+    const options_logged_in = ["Home", "Profile", "About"]
     const links = {"Home": "/", "Sign In": "/signin", "About": "/about", "Contact": "contact", "Profile": "/profile"};
 
     return (
