@@ -1,12 +1,4 @@
 import './App.css'
-<<<<<<< HEAD
-// import { Route, Routes } from 'react-router-dom';
-// import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import About from './components/About/about';
-import Contact from './components/Contact/contact';
-import Header from './components/Home/Header'
-import Navbar from './components/Navbar/Navbar'
-=======
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -16,7 +8,6 @@ import Navbar from './components/Navbar/Navbar';
 import SignIn from './components/Signin/Signin';
 import LectureQuizList from './components/LectureQuizList/LectureQuizList';
 import LecturePage from './components/Lecture/LecturePage';
->>>>>>> origin/main
 
 const App = () => {
 
