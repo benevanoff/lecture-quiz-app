@@ -3,4 +3,6 @@ pymysql
 cryptography
 Werkzeug
 Flask-Session
-functools 
+pytest
+requests
+Flask-Cors
