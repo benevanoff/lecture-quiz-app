@@ -2,7 +2,6 @@ import styles from "./Navbar.module.css";
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiAcademicCap } from "react-icons/hi";
-import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
     const nav = useNavigate();

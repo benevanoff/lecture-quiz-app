@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './components/Home/Header';
+import About from './components/About/About';
 import Navbar from './components/Navbar/Navbar';
 import SignIn from './components/Signin/Signin';
 import LectureQuizList from './components/LectureQuizList/LectureQuizList';
@@ -35,7 +35,7 @@ const App = () => {
         <Navbar isLoggedIn={isLoggedInState}/>
         <Routes>
           <Route path="/" element={<LectureQuizList />} />
-          <Route path="/about" element={<Header />} />
+          <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/lecturequizes" element={<LectureQuizList />} />
           <Route path="/lecture/:lecture_id" element={<LecturePage />} />
