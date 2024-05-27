@@ -1,14 +1,16 @@
 import styles from "./Register.module.css";
 import axios from "axios";
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const REGISTER_URL = "http://localhost:8080/register"; // TODO -> replace with environment variable
 
 const Register = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMsg, setError] = useState(false);
+    const [errorMsg, setError] = useState('');
 
     const submitRegister = async (e) => {
         e.preventDefault(); // Prevent form from submitting the default way
@@ -31,15 +33,20 @@ const Register = () => {
             );
 
             if (response.status === 200) {
-                setError(false);
+                setError('');
                 console.log("Registration success");
-                // You can redirect or show a success message here
+                // Redirect to sign-in page on successful registration
+                navigate('/signin');
             }
         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                setError('Invalid input');
-            } else if (error.response && error.response.status === 409) {
-                setError('Email already exists');
+            if (error.response) {
+                if (error.response.status === 400) {
+                    setError('Invalid input');
+                } else if (error.response.status === 409) {
+                    setError('Email already exists');
+                } else {
+                    setError('An error occurred');
+                }
             } else {
                 setError('An error occurred');
             }
@@ -47,10 +54,15 @@ const Register = () => {
         }
     };
 
+    const signinRedirect = (e) => {
+        e.preventDefault(); // Prevent default anchor behavior
+        navigate('/signin');
+    };
+
     return (
         <>
             <form onSubmit={submitRegister}>
-                {errorMsg && <p>Error: {errorMsg}</p>}
+                {errorMsg && <p style={{ color: 'red' }}>Error: {errorMsg}</p>}
                 <h1>Register</h1>
                 <div className={styles.input_boxes}>
                     <input
@@ -72,8 +84,8 @@ const Register = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Register</button>
-                <p>Already have an account? &nbsp; <a href="/signin">Sign in here</a></p>
+                <button type="submit" onClick={submitRegister}>Register</button>
+                <p>Already have an account? &nbsp; <a href="" onClick={signinRedirect}>Sign in here</a></p>
             </form>
         </>
     );

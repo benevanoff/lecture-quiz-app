@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
+import Register from './components/Register/Register';
 import About from './components/About/About';
 import Navbar from './components/Navbar/Navbar';
 import SignIn from './components/Signin/Signin';
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/" element={<LectureQuizList />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/lecturequizes" element={<LectureQuizList />} />
           <Route path="/lecture/:lecture_id" element={<LecturePage />} />
         </Routes>
