@@ -1,6 +1,6 @@
+import styles from "./Signin.module.css";
 import axios from "axios";
 import React, { useState } from 'react';
-import "./Signin.css"
 
 
 const HOST =  "http://localhost:8080/login"; // TODO -> replace with enviroment variable
@@ -36,15 +36,16 @@ const SignIn = () => {
     };
 
     return (<>
-        <center>
+        <form>
         {errorMsg && <p>Error: {errorMsg}</p>}
-        <h1>Sign In</h1>
-        <div className="input-boxes">
-            <input type="text" id="signin-username-input" onChange={ (e) => setUsername(e.target.value)}/>
-            <input type="password" id="signin-password-input" onChange={(e) => setPassword(e.target.value)}/>
+        <h1>Sign-In</h1>
+        <div className={styles.input_boxes}>
+            <input placeholder="Email" type="text" id="signin-username-input" onChange={ (e) => setUsername(e.target.value)}/>
+            <input placeholder="password" type="password" id="signin-password-input" onChange={(e) => setPassword(e.target.value)}/>
         </div>
         <button onClick={submitSignIn}>Submit</button>
-        </center>
+        <p>New user? &nbsp; <a href="">register here</a></p>
+        </form>
     </>);
 };
 
