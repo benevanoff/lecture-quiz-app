@@ -8,7 +8,6 @@
 .container {
     display: flex;
     padding: 5rem 15% 0 15%;
-    background: linear-gradient(90deg, white,#f4fff9);
     gap: 100px;
 
     & .txt_des {

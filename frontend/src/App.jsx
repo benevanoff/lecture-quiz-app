@@ -36,7 +36,7 @@ const App = () => {
       <BrowserRouter>
         <Navbar isLoggedIn={isLoggedInState}/>
         <Routes>
-          <Route path="/" element={<LectureQuizList />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/register" element={<Register />} />
@@ -44,8 +44,6 @@ const App = () => {
           <Route path="/lecture/:lecture_id" element={<LecturePage />} />
         </Routes>
       </BrowserRouter>
-
-      <Home></Home>
     </>
   );
 };

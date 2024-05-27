@@ -41,15 +41,13 @@
             cursor: pointer;
             color: gray;
             font-size: 1.1rem;
-            transition: transform 2s ease;
-
-            & *:first-child{
-                color: black;
+            transition: transform .3s ease;
+                
+            & *:hover {
+                color: black !important;
             }
-
-            & :hover {
-              color: black;  
-            }
+            
+            
         }
     }
 
