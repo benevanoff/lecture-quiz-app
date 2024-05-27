@@ -23,10 +23,11 @@ const LecturePage = () => {
         getLectureQuiz();
     });
 
-    return <center>
-        <h1>{lectureTitle}</h1>
-        <p>{lectureBody}</p>
-    </center>;
-};
+    return (<>
+    <div className={StyleSheet.quiz_card}>    
+            <h1>{lectureTitle}</h1>
+            <p>{lectureBody}</p>
+    </div>
+    </>)};
 
 export default LecturePage;

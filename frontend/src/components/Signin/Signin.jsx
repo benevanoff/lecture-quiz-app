@@ -10,7 +10,7 @@ const SignIn = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setError] = useState(false);
+  const [errorMsg, setError] = useState('');
 
   const submitSignIn = async (e) => {
     e.preventDefault(); // Prevent form from submitting the default way
@@ -33,9 +33,9 @@ const SignIn = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        setError('Invalid Credentials');
+        setError('Invalid credentials')
       } else {
-        setError('An error occurred');
+        setError('an error occured');
       }
       console.log(error.message);
     }
@@ -48,8 +48,8 @@ const SignIn = () => {
 
   return (
     <>
-      <form onSubmit={submitSignIn}>
-        {errorMsg && <p>Error: {errorMsg}</p>}
+      <form className={styles.signin_form} onSubmit={submitSignIn}>
+        {errorMsg && <p style={{ color: 'red' }}>Error: {errorMsg}</p>}
         <h1>Sign-In</h1>
         <div className={styles.input_boxes}>
           <input

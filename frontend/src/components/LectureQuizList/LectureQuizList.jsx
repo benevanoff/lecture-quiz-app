@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
+import styles from "./LectureQuizList.module.css"
 import LectureQuizTab from "./LectureQuizTab";
 
 const LectureQuizList = () => {
@@ -21,12 +22,14 @@ const LectureQuizList = () => {
       getLectureQuizes();
     }, []);
   
-    return (<center>
-      <h1>Lecture Quizzes</h1>
-      {lectures.map((lecture_id) => {
-        return <LectureQuizTab key={lecture_id} lecture_id={lecture_id}/>
-      })}
-    </center>);
+    return (<>
+      <div className={styles.quiz_list}>
+        <h1>Lecture Quizzes</h1>
+        {lectures.map((lecture_id) => {
+          return <LectureQuizTab key={lecture_id} lecture_id={lecture_id}/>
+        })}
+      </div>
+    </>);
   };
 
   export default LectureQuizList;

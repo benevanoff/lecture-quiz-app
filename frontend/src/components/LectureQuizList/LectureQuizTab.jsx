@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import './LectureQuizList.css'
+import styles from "./LectureQuizList.module.css"
 
 const LectureQuizTab = (props) => {
 

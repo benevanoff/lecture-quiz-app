@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import SignIn from './components/Signin/Signin';
 import LectureQuizList from './components/LectureQuizList/LectureQuizList';
 import LecturePage from './components/Lecture/LecturePage';
+import Home from './components/Home/Home'
 
 const App = () => {
 
@@ -43,6 +44,8 @@ const App = () => {
           <Route path="/lecture/:lecture_id" element={<LecturePage />} />
         </Routes>
       </BrowserRouter>
+
+      <Home></Home>
     </>
   );
 };

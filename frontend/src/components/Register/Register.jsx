@@ -33,7 +33,7 @@ const Register = () => {
             );
 
             if (response.status === 200) {
-                setError('');
+                setError(false);
                 console.log("Registration success");
                 // Redirect to sign-in page on successful registration
                 navigate('/signin');
@@ -61,7 +61,7 @@ const Register = () => {
 
     return (
         <>
-            <form onSubmit={submitRegister}>
+            <form className={styles.register_form} onSubmit={submitRegister}>
                 {errorMsg && <p style={{ color: 'red' }}>Error: {errorMsg}</p>}
                 <h1>Register</h1>
                 <div className={styles.input_boxes}>
