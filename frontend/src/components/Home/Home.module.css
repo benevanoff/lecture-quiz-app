@@ -7,7 +7,7 @@
 .home_header_heading {
     text-decoration: underline;
     text-align: center;
-    margin: 2rem auto;
+    margin: 2.5rem auto;
     width: 100%;
     font-size: 2rem;
 }
@@ -30,15 +30,15 @@
         justify-content: left;
         align-items: center;
         color: black;
-        font-size: 25px;
         padding: 10px 10px 10px 20px;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 1px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
         background: linear-gradient(130deg, white, white 80%, var(--dark-gold) 80%, var(--dark-gold));
+        border-radius: 10px;
 
         & div{
             display: flex;
             flex-direction: column;
-            gap: 50px;
+            gap: 1rem;
 
             & p {
                 font-family: var(--font-using);
@@ -56,7 +56,7 @@
                 cursor: pointer;
                 display: inline-block;
                 font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                font-size: 1.5rem;
+                font-size: 1rem;
                 font-weight: 600;
                 line-height: 20px;
                 list-style: none;
@@ -78,7 +78,7 @@
         }
 
         & img {
-            width: 35dvh;
+            width: 25dvh;
         }
 
     }
