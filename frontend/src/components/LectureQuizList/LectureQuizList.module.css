@@ -5,9 +5,41 @@
     align-items: center;
     gap: 30px;
     height: fit-content;
-    border-radius: 7px;
+    border-radius: 5px;
     max-width: 75%;
     padding: 3dvh;
     min-height: 40dvh;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px 1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
+
+    & .lecture_list_container{
+        padding: 20px 5px 20px 5px;
+        border-radius: inherit;
+        background-color:white;
+        min-height: 400px;
+        max-width: 80%;
+        min-width: 80%;
+        
+        & ol{
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid black;
+            min-height: 100vh;
+            gap: 0px;
+            & li{
+                padding: 5px;
+                list-style-position: inside;
+                color: rgb(80, 80, 80);
+                &:hover{
+                    color: black;
+                }
+            }
+            & :nth-child(odd){
+                background-color: lightgray;
+            }
+            
+        }
+    }
 }
+
+

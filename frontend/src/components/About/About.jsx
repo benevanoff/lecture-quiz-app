@@ -13,7 +13,7 @@ const About = () => {
             </div>
             <div className={styles.side_img}>
 
-                <img src="../../public/home-header-image.svg" alt="img" />
+                <img src="/home-header-image.svg" alt="img" />
             </div>
         </div>
         <center>

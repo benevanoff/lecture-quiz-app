@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Home.module.css';
+import LectureQuizList from '../LectureQuizList/LectureQuizList';
 
 const Home = () => {
 
@@ -9,12 +10,13 @@ const Home = () => {
         <header className={styles.home_header}>
             <div className={styles.content}>
                 <div>
-                    <p className={`slide_in_left`}>Introducing our innovative quiz app, designed to make learning Science, English, and Maths both fun and effective! Our app offers a comprehensive range of quizzes that cover essential terms, concepts, and phrases in these subjects, helping users enhance their vocabulary and comprehension.</p>
+                    {/* "slide_in_left" is a global.css class for slide-in animation*/}
+                    <p className={`slide_in_left`}>Introducing our innovative <em>quiz</em> platform, designed to make learning <em>Science</em>, <em>English</em>, and <em>Maths</em> both fun and effective! Our app offers a comprehensive range of quizzes that cover essential terms, concepts, and phrases in these subjects, helping users enhance their vocabulary and comprehension.</p>
                     <button>
                         Start Learning!
                     </button>
                 </div>
-                <img src="../../../public/achievement-svgrepo-com.svg" alt="img" />
+                <img src="/achievement-svgrepo-com.svg" alt="img" />
             </div>
         </header>
         <hr />
@@ -45,10 +47,12 @@ const Home = () => {
                 </ul>
             </section>
             <section className={styles.home_section2}>
+                <LectureQuizList />
             </section>
-            <section className={styles.home_section3}>
-
-            </section>
+            <footer>
+                &copy; 2024, LecQuiz
+                
+            </footer>
         </div>
     </>)
 }
