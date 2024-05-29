@@ -45,7 +45,7 @@
             transition: transform .3s ease;
 
             & *{
-                font-size: 2.5dvh;
+                font-size: .9rem;
             }
                 
             & *:hover {
