@@ -1,7 +1,10 @@
 import styles from "./Navbar.module.css";
+import '../../Global.css'
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiAcademicCap } from "react-icons/hi";
+
+
 
 const Navbar = (props) => {
     const nav = useNavigate();
@@ -13,7 +16,7 @@ const Navbar = (props) => {
     return (
         <>
             <nav className={styles.container}>
-                <div className={styles.logo}>
+                <div className={`${styles.logo} slide_in_left`} onClick={() => {nav(links["Home"])}}>
                     <HiAcademicCap size="40px" />
                     <h1>LecQuiz</h1>
                 </div>

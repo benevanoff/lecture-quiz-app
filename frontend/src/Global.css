@@ -1,0 +1,24 @@
+body{
+    scroll-behavior: smooth;
+}
+
+
+
+
+
+/* slinde in from left animation */
+.slide_in_left {
+    animation: 1s ease-in-out 0s slide-in-left;
+    will-change: trasfrom;
+}
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}

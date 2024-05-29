@@ -9,7 +9,7 @@ const Home = () => {
         <header className={styles.home_header}>
             <div className={styles.content}>
                 <div>
-                    <p>Introducing our innovative quiz app, designed to make learning Science, English, and Maths both fun and effective! Our app offers a comprehensive range of quizzes that cover essential terms, concepts, and phrases in these subjects, helping users enhance their vocabulary and comprehension.</p>
+                    <p className={`slide_in_left`}>Introducing our innovative quiz app, designed to make learning Science, English, and Maths both fun and effective! Our app offers a comprehensive range of quizzes that cover essential terms, concepts, and phrases in these subjects, helping users enhance their vocabulary and comprehension.</p>
                     <button>
                         Start Learning!
                     </button>
