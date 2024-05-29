@@ -43,6 +43,10 @@
             color: gray;
             font-size: 1.1rem;
             transition: transform .3s ease;
+
+            & *{
+                font-size: 2.5dvh;
+            }
                 
             & *:hover {
                 color: black !important;
