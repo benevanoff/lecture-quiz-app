@@ -93,7 +93,8 @@
     gap: 5dvh;
 
     & h1{
-        font-size: 3rem;
+        font-size: 2rem;
+        text-decoration: underline;
     }
 
     & .home_ul{
